@@ -1,24 +1,22 @@
 package com.example.demo.entity;
-import com.example.demo.enums.RoleEmploye;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "employes")
+@Table(name = "agences")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Employe {
+public class Agence {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idEmploye;
+	private Long idAgence;
 
 	private String nom;
-	private String prenom;
-
-	@Enumerated(EnumType.STRING)
-	private RoleEmploye role;
+	private String ville;
+	private String adresse;
+	private String telephone;
 }

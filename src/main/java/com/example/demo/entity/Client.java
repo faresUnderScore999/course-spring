@@ -1,24 +1,25 @@
 package com.example.demo.entity;
-import com.example.demo.enums.RoleEmploye;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "employes")
+@Table(name = "clients")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Employe {
+public class Client {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idEmploye;
+	private Long idClient;
 
 	private String nom;
 	private String prenom;
-
-	@Enumerated(EnumType.STRING)
-	private RoleEmploye role;
+	private String email;
+	private String telephone;
+	private String numPermis;
+	private LocalDate dateInscription;
 }
