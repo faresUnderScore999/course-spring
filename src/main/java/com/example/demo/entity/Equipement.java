@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "equipements")
@@ -16,4 +18,9 @@ public class Equipement {
 	private Long idEquipement;
 
 	private String libelle;
+
+	@ManyToMany(mappedBy = "equipements", fetch = FetchType.LAZY)
+	@ToString.Exclude
+	@Builder.Default
+	private List<Vehicule> vehicules = new ArrayList<>();
 }

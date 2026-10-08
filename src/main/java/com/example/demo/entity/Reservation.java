@@ -22,4 +22,19 @@ public class Reservation {
 
 	@Enumerated(EnumType.STRING)
 	private StatutReservation statut;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_vehicule")
+	@ToString.Exclude
+	private Vehicule vehicule;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_client")
+	@ToString.Exclude
+	private Client client;
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_contrat")
+	@ToString.Exclude
+	private Contrat contrat;
 }

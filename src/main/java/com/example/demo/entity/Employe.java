@@ -21,4 +21,9 @@ public class Employe {
 
 	@Enumerated(EnumType.STRING)
 	private RoleEmploye role;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_agence")
+	@ToString.Exclude
+	private Agence agence;
 }

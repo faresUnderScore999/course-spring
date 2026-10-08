@@ -20,4 +20,8 @@ public class Contrat {
 	private LocalDate dateSignature;
 	private BigDecimal montantTotal;
 	private Boolean valide;
+
+	@OneToOne(mappedBy = "contrat", fetch = FetchType.LAZY)
+	@ToString.Exclude
+	private Reservation reservation;
 }
