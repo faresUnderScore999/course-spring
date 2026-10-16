@@ -50,10 +50,13 @@ public class ContratController {
 	public ContratDTO update(@PathVariable Long id, @RequestBody ContratDTO dto) {
 		return contratService.update(id, dto);
 	}
-@PutMapping
-public ContratDTO update(@RequestBody ContratDTO dto) {
-    return contratService.update(dto.getIdContrat(), dto);
-}
+
+	// Update by id carried in the request body: PUT /api/contrats {"idContrat": 1, ...}
+	@PutMapping
+	public ContratDTO update(@RequestBody ContratDTO dto) {
+		return contratService.update(dto.getIdContrat(), dto);
+	}
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		contratService.delete(id);

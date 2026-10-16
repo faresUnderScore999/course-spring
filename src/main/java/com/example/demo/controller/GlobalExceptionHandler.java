@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -30,6 +31,12 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	public ResponseEntity<Map<String, Object>> handleUnreadableBody(HttpMessageNotReadableException ex) {
 		return build(HttpStatus.BAD_REQUEST, "Malformed or unreadable request body");
+	}
+
+	@ExceptionHandler(InvalidDataAccessApiUsageException.class)
+	public ResponseEntity<Map<String, Object>> handleInvalidDataAccess(InvalidDataAccessApiUsageException ex) {
+		// e.g. "The given id must not be null" when a body-id/path-id is missing
+		return build(HttpStatus.BAD_REQUEST, ex.getMessage());
 	}
 
 	@ExceptionHandler(DataIntegrityViolationException.class)

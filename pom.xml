@@ -20,6 +20,15 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <!-- Must match the Spring Boot generation: 2.3.x is built for Spring
+                 Boot 3.2.x / Spring Framework 6.1.x. Newer springdoc lines (2.8.x)
+                 require Framework 6.2+ and fail with NoClassDefFoundError:
+                 LiteWebJarsResourceResolver. -->
+            <version>2.3.0</version>
+        </dependency>
         <!-- JPA Data Access -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -69,6 +78,9 @@
                 <configuration>
                     <!-- JDK 23+ disables implicit annotation processing; explicitly enable it for Lombok -->
                     <proc>full</proc>
+                    <!-- Spring Boot 3.2 parameter-name discovery: keeps real parameter
+                         names (e.g. idContrat) instead of arg0/arg1 in the OpenAPI docs -->
+                    <parameters>true</parameters>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
