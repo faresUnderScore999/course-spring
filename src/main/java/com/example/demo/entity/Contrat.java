@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "contrats")
@@ -24,4 +26,9 @@ public class Contrat {
 	@OneToOne(mappedBy = "contrat", fetch = FetchType.LAZY)
 	@ToString.Exclude
 	private Reservation reservation;
+
+	@OneToMany(mappedBy = "contrat", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@Builder.Default
+	@ToString.Exclude
+	private List<Paiement> paiements = new ArrayList<>();
 }

@@ -11,6 +11,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Nested references are one-directional summaries so the JSON graph always
+ * terminates (no back-references to Paiement are serialized by ContratDTO).
+ */
 @Data
 @Builder
 @NoArgsConstructor
@@ -21,6 +25,7 @@ public class PaiementDTO {
 	private BigDecimal montant;
 	private LocalDate datePaiement;
 	private ModePaiement modePaiement;
+	private ContratDTO contrat;
 
 	public static PaiementDTO from(Paiement paiement) {
 		if (paiement == null) {
@@ -31,6 +36,7 @@ public class PaiementDTO {
 				.montant(paiement.getMontant())
 				.datePaiement(paiement.getDatePaiement())
 				.modePaiement(paiement.getModePaiement())
+				.contrat(ContratDTO.from(paiement.getContrat()))
 				.build();
 	}
 }

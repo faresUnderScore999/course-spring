@@ -35,6 +35,11 @@ public class PaiementController {
 		return paiementService.findById(id);
 	}
 
+	@GetMapping("/contrat/{idContrat}")
+	public List<PaiementDTO> getByContrat(@PathVariable Long idContrat) {
+		return paiementService.findByContrat(idContrat);
+	}
+
 	@PostMapping
 	public ResponseEntity<PaiementDTO> create(@RequestBody PaiementDTO dto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(paiementService.create(dto));

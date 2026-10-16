@@ -16,10 +16,9 @@ import com.example.demo.entity.Vehicule;
 import com.example.demo.enums.StatutReservation;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.ClientRepository;
+import com.example.demo.repository.ContratRepository;
 import com.example.demo.repository.ReservationRepository;
 import com.example.demo.repository.VehiculeRepository;
-
-import jakarta.persistence.EntityManager;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,7 +30,7 @@ public class ReservationService {
 	private final ReservationRepository reservationRepository;
 	private final VehiculeRepository vehiculeRepository;
 	private final ClientRepository clientRepository;
-	private final EntityManager entityManager;
+	private final ContratRepository contratRepository;
 
 	@Transactional(readOnly = true)
 	public List<ReservationDTO> findAll() {
@@ -121,10 +120,8 @@ public class ReservationService {
 		if (contratDto == null || contratDto.getIdContrat() == null) {
 			return null;
 		}
-		Contrat contrat = entityManager.find(Contrat.class, contratDto.getIdContrat());
-		if (contrat == null) {
-			throw new ResourceNotFoundException("Contrat not found with id: " + contratDto.getIdContrat());
-		}
-		return contrat;
+		return contratRepository.findById(contratDto.getIdContrat())
+				.orElseThrow(() -> new ResourceNotFoundException(
+						"Contrat not found with id: " + contratDto.getIdContrat()));
 	}
 }
